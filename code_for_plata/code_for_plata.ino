@@ -16,7 +16,7 @@
 
 const char* ssid = "Yura1";
 const char* password = "271183271183";
-const char* serverAddress = "31.148.251.9";
+const char* serverAddress = "192.168.1.212";
 const int serverPort = 8080;
 
 MQUnifiedsensor MQ5(Board, Voltage_Resolution, ADC_Bit_Resolution, Pin, Type);
@@ -73,7 +73,7 @@ void loop() {
     float h = dht.readHumidity();
     float gas = MQ5.readSensor();
     //*******
-    String message = "temp:" + String(t) + " hum:" + String(h) + " CO2:!" + String(gas) +"!"; // Добавляем время
+    String message = "!temp:" + String(t) + "!hum:" + String(h) + "!CO:" + String(gas); // Добавляем время
     //***********************************
     if (client.print(message)) {
         Serial.println("Сообщение отправлено: " + message);
