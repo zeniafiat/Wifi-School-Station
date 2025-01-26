@@ -16,21 +16,21 @@ WiFiClient client;
 
 //*********MQ5**************
 #define         Board                   "ESP8266"
-#define         Pin                    A0  //Analog input 3 of your arduino
+#define         Pin                    A0  
 /***********************Software Related Macros************************************/
-#define         Type                    "MQ-5" //MQ3
-#define         Voltage_Resolution      3.3 // 3V3 <- IMPORTANT
-#define         ADC_Bit_Resolution      10 // For ESP8266
+#define         Type                    "MQ-5" 
+#define         Voltage_Resolution      3.3 
+#define         ADC_Bit_Resolution      10 
 #define         RatioMQ5CleanAir        60
 /*****************************Globals***********************************************/
 MQUnifiedsensor MQ5(Board, Voltage_Resolution, ADC_Bit_Resolution, Pin, Type);
 //***********************************
 
 
-// Константы для OLED дисплея (могут меняться)
-#define SCREEN_WIDTH 128 // Ширина OLED дисплея
-#define SCREEN_HEIGHT 64 // Высота OLED дисплея
-#define OLED_RESET     -1 // Пин сброса (часто не используется, поэтому -1)
+// Константы для OLED дисплея 
+#define SCREEN_WIDTH 128 
+#define SCREEN_HEIGHT 64 
+#define OLED_RESET     -1 
 
 // Создаем объект дисплея
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -40,9 +40,9 @@ void setup() {
   Serial.begin(115200);
 
 
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Адрес дисплея (обычно 0x3C или 0x3D)
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { 
     Serial.println(F("SSD1306 allocation failed"));
-    for(;;); // Если не удалось проинициализировать дисплей - останавливаем программу
+    for(;;); 
   }
   
   display.clearDisplay();
@@ -74,22 +74,12 @@ void setup() {
 //***************************MQ5******************************************
       MQ5.setRegressionMethod(1); 
       MQ5.setA(491204); MQ5.setB(-5.826);
-      /*
-        Exponential regression:
-      Gas    | a      | b
-      LPG    | 44771  | -3.245
-      CH4    | 2*10^31| 19.01
-      CO     | 521853 | -3.821
-      Alcohol| 0.3934 | -1.504
-      Benzene| 4.8387 | -2.68
-      Hexane | 7585.3 | -2.849
-      */
       MQ5.init(); 
       Serial.print("Calibrating please wait.");
       float calcR0 = 0;
       for(int i = 1; i<=10; i ++)
       {
-        MQ5.update(); // Update data, the arduino will read the voltage from the analog pin
+        MQ5.update(); 
         calcR0 += MQ5.calibrate(RatioMQ5CleanAir);
         Serial.print(".");
       }
@@ -106,7 +96,7 @@ void setup() {
 }
 void loop() {
   //*********************MQ5**********************
-    MQ5.update(); // Update data, the arduino will read the voltage from the analog pin
+    MQ5.update();
     float gas = MQ5.readSensor();
     
   //**********************************************
@@ -122,7 +112,7 @@ void loop() {
     display.clearDisplay();
     display.setTextSize(2);
     display.setCursor(0,0);
-    display.println("temp:none"); // Выводим время в секундах
+    display.println("temp:none"); 
     display.println("humd:none");
     display.println("CO :"+String(gas));
     display.display();
@@ -135,7 +125,7 @@ void loop() {
         Serial.println("Подключено к серверу");
     } else {
       Serial.println("Не удалось подключиться к серверу. Повторяю попытку...");
-      return; // Прекращаем этот цикл и ждём следующей итерации
+      return; 
     }
   }
 
@@ -144,6 +134,6 @@ void loop() {
     } else {
         Serial.println("Не удалось отправить сообщение.");
     }
-    delay(0.5); // Повторяем попытку через 5 секунд (только если нужно)
+    delay(0.5); 
   
 }
