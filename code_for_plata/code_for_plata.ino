@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
-
 #include <MQUnifiedsensor.h>
-
-#include <DHT11.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
 
 //************WIFI**************
@@ -26,13 +26,40 @@ WiFiClient client;
 MQUnifiedsensor MQ5(Board, Voltage_Resolution, ADC_Bit_Resolution, Pin, Type);
 //***********************************
 
-//************DHT11****************
-DHT11 dht11(4);
-//*********************************
+
+// Константы для OLED дисплея (могут меняться)
+#define SCREEN_WIDTH 128 // Ширина OLED дисплея
+#define SCREEN_HEIGHT 64 // Высота OLED дисплея
+#define OLED_RESET     -1 // Пин сброса (часто не используется, поэтому -1)
+
+// Создаем объект дисплея
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 void setup() {
   //********************
   Serial.begin(115200);
+
+
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Адрес дисплея (обычно 0x3C или 0x3D)
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // Если не удалось проинициализировать дисплей - останавливаем программу
+  }
+  
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(3);
+  display.setCursor(0,0);
+  display.println("Hello");
+  display.println("Class!");
+  display.display(); 
+
+  delay(2000); // Задержка в 2 секунды
+  display.clearDisplay();
+
+
+
+
+
   //**********WIFI**********
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -78,8 +105,32 @@ void setup() {
 
 }
 void loop() {
-  //**************WIFI***********************
-  if (!client.connected()) {
+  //*********************MQ5**********************
+    MQ5.update(); // Update data, the arduino will read the voltage from the analog pin
+    float gas = MQ5.readSensor();
+    
+  //**********************************************
+ 
+  //********************DHT**************************
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //*************************************************
+
+    //*****************CONST**********************************
+  String message = String("!temp:none") + String("!hum:none") + String("!CO:") + String(gas);
+
+
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setCursor(0,0);
+    display.println("temp:none"); // Выводим время в секундах
+    display.println("humd:none");
+    display.println("CO :"+String(gas));
+    display.display();
+
+
+
+    //************MESEGE SENDER***********************
+    if (!client.connected()) {
     if (client.connect(serverAddress, serverPort)) {
         Serial.println("Подключено к серверу");
     } else {
@@ -88,29 +139,6 @@ void loop() {
     }
   }
 
-  //*********************MQ5**********************
-    MQ5.update(); // Update data, the arduino will read the voltage from the analog pin
-    float gas = MQ5.readSensor();
-  //**********************************************
-
-  //********************DHT**************************
-      int temperature = 0;
-      int humidity = 0;
-      int result = dht11.readTemperatureHumidity(temperature, humidity);
-      if (result == 0) {
-          Serial.print("Temperature: ");
-          Serial.print(temperature);
-          Serial.print(" °C\tHumidity: ");
-          Serial.print(humidity);
-          Serial.println(" %");
-      } else {
-          Serial.println(DHT11::getErrorString(result));
-      }
-  //*************************************************
-
-    //*****************CONST**********************************
-    String message = "!temp:" + String(temperature) + "!hum:" + String(humidity) + "!CO:" + String(gas); // Добавляем время
-    //************MESEGE SENDER***********************
     if (client.print(message)) {
         Serial.println("Сообщение отправлено: " + message);
     } else {
