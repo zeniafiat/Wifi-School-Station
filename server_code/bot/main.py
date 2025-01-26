@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import sys
 from handlers import rot
 from aiogram import Bot,Dispatcher,html
 
