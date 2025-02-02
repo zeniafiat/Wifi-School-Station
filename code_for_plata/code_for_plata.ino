@@ -101,19 +101,14 @@ void loop() {
     
   //**********************************************
  
-  //********************DHT**************************
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //*************************************************
 
     //*****************CONST**********************************
-  String message = String("!temp:none") + String("!hum:none") + String("!CO:") + String(gas);
+  String message = String("!CO:") + String(gas);
 
 
     display.clearDisplay();
-    display.setTextSize(2);
+    display.setTextSize(3);
     display.setCursor(0,0);
-    display.println("temp:none"); 
-    display.println("humd:none");
     display.println("CO :"+String(gas));
     display.display();
 

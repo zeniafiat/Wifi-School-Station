@@ -9,6 +9,7 @@ parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
 
 from cach_mess import get_data
+from sqlite1 import getDATA
 
 from  bot.keyboard import keyboard
 
@@ -29,4 +30,13 @@ async def echo_handler(message: Message):
         print(data)
         await message.answer(data)
     except:
-        await message.answer("не удалось получить информацию!")
+        await message.answer("не удалось получить информацию!", reply_markup=keyboard)
+
+@rot.message(lambda message: message.text.lower() == "посмотреть прошлые данные")
+async def echo_handler(message: Message):
+    try:
+        data = getDATA()
+        print(data)
+        await message.answer(data)
+    except:
+        await message.answer("не удалось получить информацию!", reply_markup=keyboard)

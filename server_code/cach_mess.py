@@ -1,5 +1,6 @@
 import socket
 from get_ip import Ip
+from sqlite1 import writeDATA
 
 def get_data():
     ip = Ip()
@@ -23,4 +24,5 @@ def get_data():
     for i in d:
         resultat += i + " "
     print(f"отправлено в хендлер: {resultat}")
+    writeDATA(resultat)
     return resultat
