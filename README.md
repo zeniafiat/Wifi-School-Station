@@ -79,6 +79,7 @@ Adafruit_GFX.h и Adafruit_SSD1306.h — для управления OLED-дис
 Переходник на github проекта:
 ![photo_2025-02-05_07-57-28](https://github.com/user-attachments/assets/7de7eb3f-bb68-4af3-bb34-02957a858e22)
 Вопросы разработчику можно задать тут: eugeniydevtalent@gmail.com
+
 Приложение:
 ![Schematic_esp1_2025-01-27](https://github.com/user-attachments/assets/66b68dd6-fe65-4e88-bd11-91af48159dc8)
 
