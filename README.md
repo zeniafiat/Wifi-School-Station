@@ -75,9 +75,12 @@ Adafruit_GFX.h и Adafruit_SSD1306.h — для управления OLED-дис
 - Более компактная сборка устройста на печтаной плате личного производства(в процессе)
 
 Ссылка на проект: [Wifi-School-Station](https://github.com/zeniafiat/Wifi-School-Station)
+
 Ссылка на телеграмм бота: https://t.me/Coyrstestbot
+
 Переходник на github проекта:
 ![photo_2025-02-05_07-57-28](https://github.com/user-attachments/assets/7de7eb3f-bb68-4af3-bb34-02957a858e22)
+
 Вопросы разработчику можно задать тут: eugeniydevtalent@gmail.com
 
 Приложение:
