@@ -4,7 +4,7 @@ from handlers import rot
 from aiogram import Bot,Dispatcher,html
 
 
-TOKEN = "8090502380:AAHJkS4rd6uSxStvFR-YIQzZi9gJu_ibYlY"
+TOKEN = "TOKEN"
 dp = Dispatcher()
 bot = Bot(token=TOKEN)
 
