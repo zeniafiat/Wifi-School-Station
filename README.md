@@ -85,13 +85,23 @@ Adafruit_GFX.h и Adafruit_SSD1306.h — для управления OLED-дис
 
 Источники:
 https://docs.python.org/3/library/socket.html
+
 https://docs.python.org/3/library/sqlite3.html
+
 https://docs.python.org/3/library/sys.html
+
 https://docs.python.org/3/library/os.html
+
 https://docs.aiogram.dev/en/stable/
+
 https://github.com/adafruit/Adafruit_FeatherOLED
+
 https://github.com/adafruit/Adafruit_BusIO
+
 https://github.com/adafruit/Adafruit-GFX-Library
+
 https://github.com/adafruit/Adafruit_SSD1306
+
 https://github.com/dvarrel/DHT22
+
 https://github.com/miguel5612/MQSensorsLib
