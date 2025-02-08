@@ -24,5 +24,5 @@ def get_data():
     for i in d:
         resultat += i + " "
     print(f"отправлено в хендлер: {resultat}")
-    writeDATA(resultat)
+    writeDATA(data)
     return resultat

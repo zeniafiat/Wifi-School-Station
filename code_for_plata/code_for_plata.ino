@@ -4,6 +4,8 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "DHT.h"
+
 
 
 //************WIFI**************
@@ -35,9 +37,19 @@ MQUnifiedsensor MQ5(Board, Voltage_Resolution, ADC_Bit_Resolution, Pin, Type);
 // Создаем объект дисплея
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+//создаём всё для dht-11
+#define DHTPIN 12
+#define DHTTYPE DHT11 
+DHT dht(DHTPIN, DHTTYPE);
+
+
+
 void setup() {
   //********************
   Serial.begin(115200);
+
+  //dht-11
+  dht.begin();
 
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { 
@@ -97,19 +109,27 @@ void setup() {
 void loop() {
   //*********************MQ5**********************
     MQ5.update();
-    float gas = MQ5.readSensor();
+  float gas = MQ5.readSensor();
     
-  //**********************************************
- 
+  //*********************DHT*************************
+  float h = dht.readHumidity();
+  
+  float t = dht.readTemperature();
+  if (isnan(h) || isnan(t)) {
+    Serial.println(F("Failed to read from DHT sensor!"));
+    return;
+  }
 
     //*****************CONST**********************************
-  String message = String("!CO:") + String(gas);
+  String message = String("!CO:") + String(gas) + String("!TEMP:") + String(t) + String("!HUMI:") + String(h);
 
 
     display.clearDisplay();
-    display.setTextSize(3);
+    display.setTextSize(1);
     display.setCursor(0,0);
     display.println("CO :"+String(gas));
+    display.println("Temperature :"+String(t));
+    display.println("Humidity :"+String(h));
     display.display();
 
 
