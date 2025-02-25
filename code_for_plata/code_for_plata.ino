@@ -39,7 +39,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 //создаём всё для dht-11
 #define DHTPIN 12
-#define DHTTYPE DHT11 
+#define DHTTYPE DHT22 
 DHT dht(DHTPIN, DHTTYPE);
 
 
@@ -149,6 +149,6 @@ void loop() {
     } else {
         Serial.println("Не удалось отправить сообщение.");
     }
-    delay(0.5); 
+    delay(500); 
   
 }
