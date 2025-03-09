@@ -24,9 +24,10 @@ void setup() {
   Serial.println("Система готова!");
 
   // Настройка пинов
+  pinMode(3, OUTPUT);
   pinMode(INPUT_PIN, INPUT);  // Пин 4 как вход
   pinMode(OUTPUT_PIN, OUTPUT); // Пин 2 как выход
-  digitalWrite(OUTPUT_PIN, LOW); // Устанавливаем низкий сигнал на пине 2
+  digitalWrite(OUTPUT_PIN, HIGH); // Устанавливаем низкий сигнал на пине 2
 }
 
 void loop() {
@@ -77,19 +78,20 @@ bool isKeyAllowed(byte *uid) {
 
 void executeCascade() {
   Serial.println("Запуск каскада функций...");
-  
+  delay(1000);
+  digitalWrite(3, HIGH);
   while (true) {
     // Чтение сигнала с пина 4
-    float signal = analogRead(INPUT_PIN) / 1023.0; // Преобразуем значение в диапазон 0.0 - 1.0
+    float signal = digitalRead(INPUT_PIN); // Преобразуем значение в диапазон 0.0 - 1.0
     Serial.print("Сигнал с пина 4: ");
     Serial.println(signal);
 
-    // Если сигнал выше 0.01, подаем высокий сигнал на пин 2
+    // Если сигнал выше 0.01, подаем  сигнал на пин 2
     if (signal > 0.01) {
-      Serial.println("Сигнал выше 0.01, подаем высокий сигнал на пин 2");
-      digitalWrite(OUTPUT_PIN, HIGH);
-    } else {
+      Serial.println("Сигнал выше 0.01, подаем  сигнал на пин 2");
       digitalWrite(OUTPUT_PIN, LOW);
+    } else {
+      digitalWrite(OUTPUT_PIN, HIGH);
     }
 
     // Проверяем наличие новой метки
@@ -97,7 +99,8 @@ void executeCascade() {
       // Если метка найдена и она подходит, выходим из цикла
       if (isKeyAllowed(rfid.uid.uidByte)) {
         Serial.println("Подходящая метка найдена, прерываем цикл.");
-        digitalWrite(OUTPUT_PIN, LOW); // Сбрасываем сигнал на пине 2
+        digitalWrite(3, LOW);
+        digitalWrite(OUTPUT_PIN, HIGH); // Сбрасываем сигнал на пине 2
         break;
       }
     }
