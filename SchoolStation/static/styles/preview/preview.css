@@ -1,0 +1,25 @@
+.preview-content{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    justify-content: space-around;
+}
+.preview-content__info{
+    margin-top: 100px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    text-wrap: wrap;
+    max-width: 550px;
+    color:  #1A1A2E;
+    background-color:#FFFFFF;
+    border-radius: 20px;
+    padding: 5px 10px;
+    align-items: center;
+}
+.preview-content__info-paragraph{
+    background-color: #1A1A2E;
+    border-radius: 20px;
+    padding: 0 5px;
+    color: #EAEAEA;
+}
