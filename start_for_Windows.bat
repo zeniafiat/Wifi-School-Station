@@ -4,4 +4,4 @@
 start cmd /k "venv\Scripts\activate.bat && python SchoolStation\manage.py runserver"
 
 :: Открытие второго терминала и активация второго виртуального окружения
-start cmd /k "Wifi-School-Station\.venv\Scripts\activate.bat && python Wifi-School-Station\server_code\bot\main.py"
+start cmd /k "Wifi-School-Station\venv\Scripts\activate.bat && python Wifi-School-Station\server_code\bot\main.py"
