@@ -1,7 +1,0 @@
-<script>start("g:\\Visual_Studio_Code_Progects\\Wifi_School_Station\\final-version\\Wifi-School-Station\\server_code\\");</script>
-<script>onHasParentDirectory();</script>
-<script>addRow("__pycache__","__pycache__",1,0,"0 B",1741519327,"09.03.2025, 14:22:07");</script>
-<script>addRow("bot","bot",1,0,"0 B",1741515201,"09.03.2025, 13:13:21");</script>
-<script>addRow("cach_mess.py","cach_mess.py",0,860,"860 B",1741522791,"09.03.2025, 15:19:51");</script>
-<script>addRow("get_ip.py","get_ip.py",0,227,"227 B",1738733050,"05.02.2025, 08:24:10");</script>
-<script>addRow("sqlite1.py","sqlite1.py",0,2379,"2.3 kB",1741519320,"09.03.2025, 14:22:00");</script>
