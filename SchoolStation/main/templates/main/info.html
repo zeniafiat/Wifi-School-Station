@@ -23,7 +23,7 @@
                     <a href="{% url 'index' %}"><button class="navigation-links__item">Главная</button></a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'info' %}"><button class="navigation-links__item navigation-links__item-active">Показания</button></a>
-                        <a href="{% url 'users:logout' %}"><button class="navigation-links__item navigation-links__item-active">Выйти</button></a>
+                        <a href="{% url 'users:logout' %}"><button class="navigation-links__item ">Выйти</button></a>
                     {% endif %}
                     <a href="{% url 'docs' %}"><button class="navigation-links__item">Документация</button></a>
                     {% if not user.is_authenticated %}
