@@ -1,0 +1,43 @@
+.information-cards {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    padding: 20px;
+}
+
+.information-cards__item {
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 15px;
+    width: 250px; 
+    text-align: center; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.information-cards__item:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /
+}
+
+.information-cards__item-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; 
+    margin-bottom: 10px;
+}
+
+.information-cards__item-img {
+    border-radius: 8px; 
+    margin-bottom: 10px;
+    max-width: 100%; 
+    height: auto; 
+}
+
+.information-cards__item-paragraph {
+    font-size: 14px;
+    color: #555; 
+    margin: 5px 0; 
+}
