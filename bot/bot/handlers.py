@@ -11,7 +11,7 @@ from users.models import UserProfile
 
 from asgiref.sync import sync_to_async
 
-from  .keyboard import keyboard
+from  bot.keyboard import keyboard
 
 
 import os

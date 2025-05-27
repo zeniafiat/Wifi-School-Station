@@ -3,7 +3,7 @@
 import logging
 from aiogram import Bot, Dispatcher
 
-from .handlers import create_router  # Теперь это функция
+from bot.handlers import create_router  # Теперь это функция
 
 TOKEN = "7282246929:AAEBtMCpibWIL9GmTNh6AZfdkJy06eH0vX0"
 bot = Bot(token=TOKEN)
