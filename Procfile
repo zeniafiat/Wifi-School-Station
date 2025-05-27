@@ -1,1 +1,1 @@
-web: gunicorn SchoolStation.wsgi
+web: python start_project.py
