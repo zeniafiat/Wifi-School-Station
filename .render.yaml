@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: drf-api
+    name: schoolstation-api
     env: python
     rootDir: .
     buildCommand: "pip install -r requirements.txt"
@@ -12,11 +12,11 @@ services:
         value: "*.onrender.com"
       - key: DATABASE_URL
         fromDatabase:
-          name: drf-db
+          name: schoolstation-db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
   - type: postgres
-    name: drf-db
-    databaseName: drfdb
-    user: drfuser
+    name: schoolstation-db
+    databaseName: schoolstationdb
+    user: schoolstationuser
