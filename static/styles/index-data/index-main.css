@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --color-1:#e7e7e7;
+    --color-2:#2c2c2c;
+    --color-3:#240090;
+    --color-4:#3500D3;
+    --color-5:#282828;
+    --color-6:rgb(177, 177, 177);
+}
+.container{
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+body{
+    background: #1A1A2E;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.container-relative{
+    position: relative;
+}
+.section{
+    margin-bottom: 100px;
+}
+.footer-fixed{
+    position: fixed; /* Фиксированное положение */
+    left: 0;
+    bottom: 0; /* Прикрепляем к низу */
+    width: 100%;
+}

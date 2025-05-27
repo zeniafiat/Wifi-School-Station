@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\styles\index-data\index-main.css">
+    <link rel="stylesheet" href="\static\styles\index-data\nav.css">
+    <link rel="stylesheet" href="\static\styles\info\info.css">
+    <link rel="stylesheet" href="\static\styles\index-data\footer.css">
+    <link rel="stylesheet" href="\static\styles\login\login.css">
+</head>
+<body>
+    <section class="information">
+        <div class="container">
+            <nav class="navigation">
+                <div class="navigation-logo">
+                    <img class="navigation-logo__img" src="\static\data\img\photo_2025-02-14_16-50-33.png" alt="ERROR"  width="200px">
+                    <div class="navigation-logo__info">
+                        <h3 class="navigation-logo__title">Школьная Wifi станция</h3>
+                        <p class="navigation-logo__paragraph">Мы за безопасность и удобство!</p>
+                    </div>
+                </div>
+                <div class="navigation-links">
+                    <a href="{% url 'index' %}"><button class="navigation-links__item">Главная</button></a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'info' %}"><button class="navigation-links__item navigation-links__item-active">Показания</button></a>
+                        <a href="{% url 'users:logout' %}"><button class="navigation-links__item ">Выйти</button></a>
+                    {% endif %}
+                    <a href="{% url 'docs' %}"><button class="navigation-links__item">Документация</button></a>
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'users:login' %}"><button class="navigation-links__item">Вход</button></a>
+                        <a href="{% url 'users:registration' %}"><button class="navigation-links__item">Регистрация</button></a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% if user.username != 'root' %}
+                <div class="login-container" style="margin: 20px auto">
+                        <form action="{% url 'info' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{form.username.id_for_lable}}">Sensor ID</label>
+                                {{form.sensor_id}}
+                            </div>
+                            <button type="submit" class="login-btn">Submit</button>
+                        </form>
+                </div>
+            {% endif %}
+            <div class="information-cards">
+                {%for data in dat%}
+                <div class="information-cards__item">
+                    {% if data.secure != 0 %}
+                        <h3 class="information-cards__item-title" style="color: red;">ОПАСНОСТЬ</h3>
+                    {% endif%}
+                    <h3 class="information-cards__item-title">{{data.room}} Кабинет</h3>
+                    <img class="navigation-logo__img information-cards__item-img" src="\static\data\img\photo_2025-02-14_16-50-33.png" alt="ERROR"  width="200px">
+                    <p class="information-cards__item-paragraph">Угарный газ: {{data.CO}}</p>
+                    <p class="information-cards__item-paragraph">Влажность: {{data.HUM}}</p>
+                    <p class="information-cards__item-paragraph">Темпиратура: {{data.TEMP}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <footer class="footer footer-fixed">
+        <div class="footer-content">
+            <h4 class="footer-content__title">Информация о проекте и разработчике: </h4>
+            <div class="footer-content__data">
+                <img class="footer-content__data-img" src="\static\data\img\git-logo.png" alt="ERROR">
+                <a href="https://github.com/zeniafiat"><button class="navigation-links__item">Наш github</button></a>
+                <a href="eugeniydevtalent@gmail.com"><button class="navigation-links__item">Написать по вопросам</button></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

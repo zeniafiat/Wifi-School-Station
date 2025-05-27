@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: drf-api
+    env: python
+    rootDir: .
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn SchoolStation.wsgi"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: drf-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+  - type: postgres
+    name: drf-db
+    databaseName: drfdb
+    user: drfuser

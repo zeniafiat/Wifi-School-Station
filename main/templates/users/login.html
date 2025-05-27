@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\styles\index-data\index-main.css">
+    <link rel="stylesheet" href="\static\styles\login\login.css">
+    <link rel="stylesheet" href="\static\styles\index-data\nav.css">
+    <link rel="stylesheet" href="\static\styles\index-data\footer.css">
+</head>
+<body>
+    <section class="login">
+        <div class="container">
+            <nav class="navigation">
+                <div class="navigation-logo">
+                    <img class="navigation-logo__img" src="\static\data\img\photo_2025-02-14_16-50-33.png" alt="ERROR"  width="200px">
+                    <div class="navigation-logo__info">
+                        <h3 class="navigation-logo__title">Школьная Wifi станция</h3>
+                        <p class="navigation-logo__paragraph">Мы за безопасность и удобство!</p>
+                    </div>
+                </div>
+                <div class="navigation-links">
+                    <a href="{% url 'index' %}"><button class="navigation-links__item">Главная</button></a>
+                    <a href="{% url 'docs' %}"><button class="navigation-links__item">Документация</button></a>
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'users:registration' %}"><button class="navigation-links__item">Регистрация</button></a>
+                    {% endif %}
+                </div>
+            </nav>
+            <div class="login-content">
+                <div class="login-container">
+                    <h2>Login</h2>
+                    <form action="{% url 'users:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{form.username.id_for_lable}}">Username</label>
+                            {{form.username}}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{form.password.id_for_lable}}">Password</label>
+                            {{form.password}}
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <footer class="footer footer-fixed">
+            <div class="footer-content">
+                <h4 class="footer-content__title">Информация о проекте и разработчике: </h4>
+                <div class="footer-content__data">
+                    <img class="footer-content__data-img" src="\static\data\img\git-logo.png" alt="ERROR">
+                    <a href="https://github.com/zeniafiat"><button class="navigation-links__item">Наш github</button></a>
+                    <a href="eugeniydevtalent@gmail.com"><button class="navigation-links__item">Написать по вопросам</button></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
