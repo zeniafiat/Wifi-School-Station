@@ -1,18 +1,20 @@
+# main.py
+
 import logging
-from .handlers import rot
-from aiogram import Bot,Dispatcher
+from aiogram import Bot, Dispatcher
 
-
+from .handlers import create_router  # Теперь это функция
 
 TOKEN = "7282246929:AAEBtMCpibWIL9GmTNh6AZfdkJy06eH0vX0"
-dp = Dispatcher()
 bot = Bot(token=TOKEN)
-
+dp = Dispatcher()
 
 async def start_bot():
-    dp.include_router(rot)
+    router = create_router()  # Создаем новый роутер при каждом запуске
+    dp.include_router(router)
+
     logging.basicConfig(level=logging.INFO)
-    try: 
+    try:
         await dp.start_polling(bot)
     finally:
         await bot.session.close()

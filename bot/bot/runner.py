@@ -4,9 +4,7 @@ from .main import start_bot
 
 
 def run_aiogram_bot():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(start_bot())
+    asyncio.run(start_bot())
 
 
 def start_bot_thread():
