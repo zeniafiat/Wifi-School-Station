@@ -4,6 +4,7 @@ from aiogram import html, Router, F
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
+import django
 from main.models import DATT
 from django.contrib.auth import authenticate
 from users.models import UserProfile
@@ -13,6 +14,12 @@ from asgiref.sync import sync_to_async
 from  .keyboard import keyboard
 
 
+import os
+
+
+# Инициализируем Django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+django.setup()
 
 def create_router():
     rot = Router()
