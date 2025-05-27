@@ -1,6 +1,6 @@
 import threading
 import asyncio
-from bot.main import start_bot
+from main import start_bot
 
 
 def run_aiogram_bot():
