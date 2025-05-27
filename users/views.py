@@ -23,7 +23,7 @@ def login(request):
     context = {
         'form': form
     }
-    return render(request, 'users\login.html', context)
+    return render(request, 'users\\login.html', context)
 
 def registrarion(request):
     if request.method == "POST":

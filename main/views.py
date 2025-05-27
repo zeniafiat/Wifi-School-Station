@@ -7,10 +7,10 @@ def index(request):
     context = {
         'title': 'School'
     }
-    return render(request, 'main\index.html',context=context)
+    return render(request, 'main\\index.html',context=context)
 
 def docs(request):
-    return render(request, 'main\docks.html')
+    return render(request, 'main\\docks.html')
 
 @login_required
 def info(request):
@@ -27,7 +27,7 @@ def info(request):
         'dat':DATT.objects.all(),
         'form': form,
         }
-        return render(request, 'main\info.html', context)
+        return render(request, 'main\\info.html', context)
     else:
         try:
             profile = user.userprofile 
@@ -37,9 +37,9 @@ def info(request):
             'dat':DATT.objects.filter(addr=sensor_id),
             'form': form,
             }
-            return render(request, 'main\info.html', context)
+            return render(request, 'main\\info.html', context)
         except: 
-            return render(request, 'main\index.html', context)
+            return render(request, 'main\\index.html', context)
     
 
 
