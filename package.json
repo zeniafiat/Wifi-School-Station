@@ -1,5 +1,0 @@
-{
-    "scripts": {
-        "postdeploy": "python manage.py collectstatic --noinput"
-    }
-}
