@@ -26,8 +26,16 @@ SECRET_KEY = "django-insecure-apqnxc(iileif9ok=xoys(sler*k*m*%2rc&o%hi#awc)xww=u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'web-production-e4c4.up.railway.app',
+    '.railway.app',  # разрешаем все поддомены
+]
 
+# Добавь доверенные источники для CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-e4c4.up.railway.app ',
+    'https://*.railway.app',
+]
 
 # Application definition
 
