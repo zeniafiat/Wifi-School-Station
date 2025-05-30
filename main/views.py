@@ -7,10 +7,10 @@ def index(request):
     context = {
         'title': 'School'
     }
-    return render(request, 'main/index.html',context=context)
+    return render(request, 'main\index.html',context=context)
 
 def docs(request):
-    return render(request, 'main/docks.html')
+    return render(request, 'main\docks.html')
 
 @login_required
 def info(request):
