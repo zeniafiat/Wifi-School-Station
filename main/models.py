@@ -6,6 +6,6 @@ class DATT(models.Model):
     addr = models.IntegerField()
     room = models.IntegerField()
     CO = models.CharField(max_length=8)
-    HUM = models.CharField(max_length=3)
-    TEMP = models.CharField(max_length=4)
+    HUM = models.CharField(max_length=8)
+    TEMP = models.CharField(max_length=8)
     time = models.TimeField(auto_now=True)
