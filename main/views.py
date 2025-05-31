@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Max, Subquery, OuterRef
 from .models import DATT
 from .forms import sencorIDform
+
 
 def index(request):
     context = {
@@ -15,6 +17,12 @@ def docs(request):
 @login_required
 def info(request):
     user = request.user
+    latest_ids = DATT.objects.values('addr', 'room').annotate(
+        latest_id=Max('id')
+    ).values_list('latest_id', flat=True)
+    
+    # Получаем полные объекты для этих ID
+    sensors = DATT.objects.filter(id__in=latest_ids).order_by('-time')
     if request.method == "POST":
         form = sencorIDform(request.POST)
         sensor_id = request.POST['sensor_id']
@@ -24,7 +32,7 @@ def info(request):
         form = sencorIDform()
     if user.username == 'root':
         context = {
-        'dat':DATT.objects.all(),
+        'dat':sensors,
         'form': form,
         }
         return render(request, 'main/info.html', context)
@@ -34,7 +42,7 @@ def info(request):
             sensor_id = profile.sensor_id
             print(sensor_id)
             context = {
-            'dat':DATT.objects.filter(addr=sensor_id),
+            'dat':sensors.filter(addr=sensor_id),
             'form': form,
             }
             return render(request, 'main/info.html', context)
