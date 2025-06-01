@@ -22,7 +22,7 @@ def info(request):
     ).values_list('latest_id', flat=True)
     
     # Получаем полные объекты для этих ID
-    sensors = DATT.objects.filter(id__in=latest_ids).order_by('-time')
+    sensors = DATT.objects.filter(id__in=latest_ids).order_by('-id')
     if request.method == "POST":
         form = sencorIDform(request.POST)
         sensor_id = request.POST['sensor_id']

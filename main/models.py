@@ -21,7 +21,7 @@ def clean_old_records(sender, instance, created, **kwargs):
         to_delete = DATT.objects.filter(
             addr=instance.addr,
             room=instance.room
-        ).order_by('-time').values_list('id', flat=True)[10:]
+        ).order_by('-id').values_list('id', flat=True)[10:]
         
         if to_delete.exists():
             with transaction.atomic():
